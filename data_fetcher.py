@@ -1,23 +1,19 @@
-
-import requests
+import feedparser
 
 def get_news(stock):
-    API_KEY = "YOUR_API_KEY"
-    url = f"https://newsapi.org/v2/everything?q={stock}&apiKey={API_KEY}"
+    # 🔥 Google News RSS (no API key needed)
+    url = f"https://news.google.com/rss/search?q={stock}+stock&hl=en-IN&gl=IN&ceid=IN:en"
 
-    response = requests.get(url)
-    data = response.json()
-
-    # 🔥 Debug print
-    print("API RESPONSE:", data)
-
-    # ✅ Safe check
-    if 'articles' not in data:
-        print("Error from API:", data.get("message", "Unknown error"))
-        return ["No news found or API error"]
+    feed = feedparser.parse(url)
 
     articles = []
-    for a in data['articles'][:10]:
-        articles.append(a['title'])
+
+    # ✅ Get latest 5 news
+    for entry in feed.entries[:5]:
+        articles.append(entry.title)
+
+    # ❌ If no news found
+    if not articles:
+        return ["No recent news found"]
 
     return articles

@@ -28,20 +28,26 @@
 
         <h2>{{ stock }}</h2>
 
-        <!-- Sentiment with dynamic color -->
+        <!-- Sentiment -->
         <h3 class="sentiment {{ sentiment|lower }}">
             {{ sentiment }}
         </h3>
 
         <p>Score: {{ score }}</p>
 
+        <!-- News -->
         <h3>📰 Latest News</h3>
-
         <ul>
             {% for n in news %}
                 <li>{{ n }}</li>
             {% endfor %}
         </ul>
+
+        <!-- 🔥 GRAPH SECTION (IMPORTANT) -->
+        {% if graph %}
+            <h3>📈 Stock Price Graph</h3>
+            <img src="{{ graph }}" width="80%" style="border-radius: 15px; margin-top: 10px;">
+        {% endif %}
 
     </div>
     {% endif %}
