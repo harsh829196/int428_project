@@ -2,29 +2,51 @@
 <html>
 <head>
     <title>Stock Sentiment Chatbot</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<h1>📊 Stock Sentiment Chatbot</h1>
+<div class="container">
 
-<form method="POST">
-    <input type="text" name="stock" placeholder="Enter stock name..." required>
-    <button type="submit">Analyze</button>
-</form>
+    <h1>📊 Stock Sentiment Chatbot</h1>
 
-{% if sentiment %}
-    <h2>Stock: {{ stock }}</h2>
-    <h3>Sentiment: {{ sentiment }}</h3>
-    <p>Score: {{ score }}</p>
+    <!-- Input Form -->
+    <form method="POST">
+        <input type="text" name="stock" placeholder="Enter stock name (e.g. TCS, Tesla)" required>
+        <button type="submit">Analyze</button>
+    </form>
 
-    <h3>Latest News:</h3>
-    <ul>
-        {% for n in news %}
-            <li>{{ n }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <!-- Result Section -->
+    {% if sentiment %}
+    <div class="card">
+
+        <h2>{{ stock }}</h2>
+
+        <!-- Sentiment with dynamic color -->
+        <h3 class="sentiment {{ sentiment|lower }}">
+            {{ sentiment }}
+        </h3>
+
+        <p>Score: {{ score }}</p>
+
+        <h3>📰 Latest News</h3>
+
+        <ul>
+            {% for n in news %}
+                <li>{{ n }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    {% endif %}
+
+</div>
 
 </body>
 </html>
