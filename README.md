@@ -1,12 +1,11 @@
 # FinBot — Stock Market Sentiment Chatbot
 
 A Bloomberg-terminal-style Flask web app that combines live stock data,
-news sentiment analysis, and AI-powered chat (Claude) in one interface.
+news sentiment analysis, and AI-powered chat  in one interface.
 
 ## Features
 - 🔴 Live stock quotes via Alpha Vantage
 - 📰 News sentiment scoring via Alpha Vantage NEWS_SENTIMENT
-- 🤖 AI chat powered by Anthropic Claude (claude-sonnet)
 - 📊 Multi-stock comparison
 - 🎨 Dark terminal UI with real-time ticker strip
 
