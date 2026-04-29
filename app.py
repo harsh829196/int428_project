@@ -9,8 +9,8 @@ import random
 app = Flask(__name__)
 
 # ── Free API endpoints ────────────────────────────────────────────────────────
-ALPHA_VANTAGE_KEY = "demo"          # demo key – works for a handful of tickers
-GNEWS_KEY        = "demo"           # GNews free tier (no key needed for demo)
+ALPHA_VANTAGE_KEY = "VPWCIN2XORK28X2G"          # demo key – works for a handful of tickers
+GNEWS_KEY        = "fe2479fbf9a16123eabdd07d11fb8deb"           # GNews free tier (no key needed for demo)
 
 # Popular ticker → company name map (offline fallback)
 TICKER_MAP = {
