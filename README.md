@@ -1,85 +1,54 @@
-# FinBot — Stock Market Sentiment Chatbot
+# 📈 SentimentPulse — Stock Market Sentiment Chatbot
 
-A Bloomberg-terminal-style Flask web app that combines live stock data,
-news sentiment analysis, and AI-powered chat  in one interface.
+A real-time stock market sentiment analysis chatbot built with Flask.
 
-## Features
-- 🔴 Live stock quotes via Alpha Vantage
-- 📰 News sentiment scoring via Alpha Vantage NEWS_SENTIMENT
-- 📊 Multi-stock comparison
-- 🎨 Dark terminal UI with real-time ticker strip
+## ✨ Features
 
-## Setup
+| Feature | Description |
+|---|---|
+| 🔴 Live Sentiment Streaming | Bot responses stream token-by-token via SSE |
+| 📡 Sentiment Pulse Meter | Live oscilloscope wave + arc needle in sidebar |
+| 📰 News-based NLP | Fetches real headlines, scores with keyword NLP |
+| 📊 Ticker Breakdown | Bull/Bear/Neutral bar charts update per query |
+| ⚡ Trending Sidebar | Top 5 tickers with live sentiment badges |
+| 🎨 Dark Terminal UI | Space Mono + Syne fonts, cyan-on-dark aesthetic |
 
-### 1. Install dependencies
+## 🚀 Setup
+
 ```bash
+cd stock-sentiment
 pip install -r requirements.txt
-```
-
-### 2. Get free API keys
-| Service | URL | Free tier |
-|---------|-----|-----------|
-| Alpha Vantage | https://www.alphavantage.co/support/#api-key | 25 calls/day |
-| NewsAPI (optional) | https://newsapi.org/register | 100 calls/day |
-| Anthropic | https://console.anthropic.com | Pay-per-use |
-
-### 3. Set environment variables
-```bash
-# Linux / macOS
-export ALPHA_VANTAGE_KEY="your_key_here"
-export ANTHROPIC_API_KEY="your_key_here"
-export NEWS_API_KEY="your_key_here"   # optional
-
-# Windows PowerShell
-$env:ALPHA_VANTAGE_KEY = "your_key_here"
-$env:ANTHROPIC_API_KEY = "your_key_here"
-```
-
-### 4. Run
-```bash
 python app.py
 ```
-Open http://localhost:5000
 
-## API Endpoints
+Then open **http://localhost:5000**
 
-| Method | Route | Description |
-|--------|-------|-------------|
-| POST | /api/stock | Fetch quote + news + sentiment for one ticker |
-| POST | /api/chat  | Chat with Claude using live market context |
-| POST | /api/compare | Compare up to 4 tickers side-by-side |
+## 🔑 Free API Keys (optional upgrades)
 
-### /api/stock — Request
-```json
-{ "symbol": "AAPL" }
-```
+| API | Free Tier | Get Key |
+|---|---|---|
+| Alpha Vantage | 25 req/day | https://www.alphavantage.co/support/#api-key |
+| GNews | 100 req/day | https://gnews.io |
 
-### /api/chat — Request
-```json
-{
-  "history": [{"role":"user","content":"What's the sentiment?"}],
-  "symbol": "AAPL",
-  "context": { /* data from /api/stock */ }
-}
-```
+Replace `ALPHA_VANTAGE_KEY` and `GNEWS_KEY` in `app.py` with your keys.
 
-### /api/compare — Request
-```json
-{ "symbols": ["AAPL", "MSFT", "NVDA"] }
-```
+## 💬 Example Queries
 
-## Architecture
+- `AAPL sentiment` — Apple analysis
+- `Is TSLA bullish?` — Tesla sentiment
+- `NVDA analysis` — NVIDIA deep-dive
+- `What's the market mood on META?`
+
+## 📁 Structure
 
 ```
-app.py
-├── fetch_quote()       → Alpha Vantage GLOBAL_QUOTE
-├── fetch_news()        → Alpha Vantage NEWS_SENTIMENT (+ NewsAPI fallback)
-├── compute_sentiment() → weighted score from news + price momentum
-├── build_context()     → aggregates all data for a ticker
-└── claude_chat()       → Anthropic /v1/messages with market context
+stock-sentiment/
+├── app.py              # Flask backend + sentiment engine
+├── requirements.txt
+└── templates/
+    └── index.html      # Single-file dark UI
 ```
 
-## Notes
-- Alpha Vantage free tier: 25 API calls/day. Use `demo` key to test (limited data).
-- News sentiment requires Alpha Vantage Premium for full coverage.
-- The AI chat works best with ANTHROPIC_API_KEY set.
+## ⚠️ Disclaimer
+
+For educational/demo purposes only. Not financial advice.
